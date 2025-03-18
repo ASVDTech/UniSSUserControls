@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{54C4B137-73DD-456C-93AD-BB27E0E271E5}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="package\UniSSUserControls.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="demo\UniSSUserControlsDemo.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="UniSSUserControls">
+        <MSBuild Projects="package\UniSSUserControls.dproj"/>
+    </Target>
+    <Target Name="UniSSUserControls:Clean">
+        <MSBuild Projects="package\UniSSUserControls.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="UniSSUserControls:Make">
+        <MSBuild Projects="package\UniSSUserControls.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="UniSSUserControlsDemo">
+        <MSBuild Projects="demo\UniSSUserControlsDemo.dproj"/>
+    </Target>
+    <Target Name="UniSSUserControlsDemo:Clean">
+        <MSBuild Projects="demo\UniSSUserControlsDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="UniSSUserControlsDemo:Make">
+        <MSBuild Projects="demo\UniSSUserControlsDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="UniSSUserControls;UniSSUserControlsDemo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="UniSSUserControls:Clean;UniSSUserControlsDemo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="UniSSUserControls:Make;UniSSUserControlsDemo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

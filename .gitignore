@@ -1,0 +1,17 @@
+demo/__history/
+demo/Win32/
+src/__history/
+src/Conectores/FireDAC/__history/
+src/Entidades/__history/
+src/Utils/__history/
+package/Win32/
+package/__history/
+package/UniSSUserControls.dproj.local
+package/UniSSUserControls.identcache
+package/UniSSUserControls.res
+package/UniSSUserControls.skincfg
+demo/UniSSUserControlsDemo.skincfg
+demo/UniSSUserControlsDemo.res
+package/SSUserControls.skincfg
+demo/UniSSUserControlsDemo.identcache
+demo/UniSSUserControlsDemo.dproj.local

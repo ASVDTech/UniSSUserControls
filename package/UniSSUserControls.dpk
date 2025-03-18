@@ -1,0 +1,36 @@
+package UniSSUserControls;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+contains
+  UniSSUserControls.TUniSSUserControls in '..\src\UniSSUserControls.TUniSSUserControls.pas',
+  UniSSUserControls.Utils.Geral in '..\src\Utils\UniSSUserControls.Utils.Geral.pas',
+  UniSSUserControls.Entidade.SessaoUsuario in '..\src\Entidades\UniSSUserControls.Entidade.SessaoUsuario.pas',
+  UniSSUserControls.Conector.FireDAC in '..\src\Conectores\FireDAC\UniSSUserControls.Conector.FireDAC.pas';
+
+end.
