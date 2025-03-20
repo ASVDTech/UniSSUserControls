@@ -6,9 +6,7 @@ Bem-vindo ao **UniSSUserControls**, um poderoso componente para gerenciamento de
 
 ## 🚀 Recursos Principais
 
-- 🔑 **Autenticação Simples e Segura**
-- 🛡 **Controle de Permissões Granular**
-- 👥 **Gerenciamento de Usuários e Grupos**
+- 👥 **Gerenciamento de Usuários**
 - 🔄 **Integração com FireDAC**
 - 📌 **Facilidade de Uso e Configuração**
 
