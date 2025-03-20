@@ -5,6 +5,9 @@ interface
 uses
   System.SysUtils,
   System.Classes,
+  uniGUIBaseClasses,
+  uniGUIClasses,
+  uniGUITypes,
   FireDAC.Stan.Intf,
   FireDAC.Stan.Option,
   FireDAC.Stan.Param,
@@ -17,19 +20,13 @@ uses
   Data.DB,
   FireDAC.Comp.DataSet,
   FireDAC.Comp.Client,
-  uniGUIBaseClasses,
-  uniGUIClasses,
-  uniGUIForm,
   UniSSUserControls.Utils.Geral,
-  UniSSUserControls.Entidade.SessaoUsuario, uniGUIApplication;
-
-const
-  ABOUT = 'Arthur Steinbach';
-  VERSION = '1.0.0';
+  UniSSUserControls.Entidade.SessaoUsuario,
+  uniGUIApplication;
 
 type
   TUniSSUserControls = class(TUniComponent)
-  strict private
+  private
     { Private declarations }
     FConnection: TFDConnection;
     FTipoControle: TTipoControle;
@@ -38,7 +35,7 @@ type
     FParametrosSQLIniciar: TStringList;
     FSQLFinalizarSessao: TStringList;
     FParametrosSQLFinalizar: TStringList;
-  strict protected
+  protected
     { Protected declarations }
     function GetAbout: string;
     function GetVersion: string;
@@ -63,9 +60,14 @@ type
 
     function GetTipoConector: TTipoConector;
     procedure SetTipoConector(const pValor: TTipoConector);
+
+    procedure WebCreate; override;
+    procedure DOHandleEvent(EventName: string; Params: TUniStrings); override;
+    procedure LoadCompleted; override;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
     procedure CarregarControleFimSessao(const pSessao: TUniGUISession);
 
     function CriarUsuarioSessao: TSessaoUsuario;
@@ -108,7 +110,8 @@ end;
 
 constructor TUniSSUserControls.Create(AOwner: TComponent);
 begin
-  inherited Create(AOwner);
+  inherited;
+  FConnection := nil;
   FSQLIniciarSessao := TStringList.Create;
   FParametrosSQLIniciar := TStringList.Create;
   FSQLFinalizarSessao := TStringList.Create;
@@ -118,6 +121,21 @@ end;
 function TUniSSUserControls.CriarUsuarioSessao: TSessaoUsuario;
 begin
   Result := TSessaoUsuario.Create;
+end;
+
+destructor TUniSSUserControls.Destroy;
+begin
+  FreeAndNil(FSQLIniciarSessao);
+  FreeAndNil(FParametrosSQLIniciar);
+  FreeAndNil(FSQLFinalizarSessao);
+  FreeAndNil(FParametrosSQLFinalizar);
+  inherited;
+end;
+
+procedure TUniSSUserControls.DOHandleEvent(EventName: string; Params: TUniStrings);
+begin
+  inherited;
+
 end;
 
 procedure TUniSSUserControls.FinalizarSessao(const pSessao: TSessaoUsuario);
@@ -133,7 +151,7 @@ end;
 
 function TUniSSUserControls.GetAbout: string;
 begin
-  Result := ABOUT;
+  Result := 'Arthur Steinbach';
 end;
 
 function TUniSSUserControls.GetConnection: TFDConnection;
@@ -173,7 +191,7 @@ end;
 
 function TUniSSUserControls.GetVersion: string;
 begin
-  Result := VERSION;
+  Result := '1.0.0';
 end;
 
 procedure TUniSSUserControls.GravarFimSessao;
@@ -214,6 +232,12 @@ begin
   end;
 end;
 
+procedure TUniSSUserControls.LoadCompleted;
+begin
+  inherited;
+
+end;
+
 procedure TUniSSUserControls.SetConnection(const pValor: TFDConnection);
 begin
   FConnection := pValor;
@@ -249,4 +273,11 @@ begin
   FTipoControle := pValor;
 end;
 
+procedure TUniSSUserControls.WebCreate;
+begin
+  inherited;
+  JSComponent := TJSObject.JSCreate('Object');
+end;
+
 end.
+

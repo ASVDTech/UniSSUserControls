@@ -3,10 +3,10 @@
         <ProjectGuid>{54C4B137-73DD-456C-93AD-BB27E0E271E5}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="package\UniSSUserControls.dproj">
+        <Projects Include="demo\UniSSUserControlsDemo.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="demo\UniSSUserControlsDemo.dproj">
+        <Projects Include="package\UniSSUserControls.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -17,15 +17,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="UniSSUserControls">
-        <MSBuild Projects="package\UniSSUserControls.dproj"/>
-    </Target>
-    <Target Name="UniSSUserControls:Clean">
-        <MSBuild Projects="package\UniSSUserControls.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="UniSSUserControls:Make">
-        <MSBuild Projects="package\UniSSUserControls.dproj" Targets="Make"/>
-    </Target>
     <Target Name="UniSSUserControlsDemo">
         <MSBuild Projects="demo\UniSSUserControlsDemo.dproj"/>
     </Target>
@@ -35,14 +26,23 @@
     <Target Name="UniSSUserControlsDemo:Make">
         <MSBuild Projects="demo\UniSSUserControlsDemo.dproj" Targets="Make"/>
     </Target>
+    <Target Name="UniSSUserControls">
+        <MSBuild Projects="package\UniSSUserControls.dproj"/>
+    </Target>
+    <Target Name="UniSSUserControls:Clean">
+        <MSBuild Projects="package\UniSSUserControls.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="UniSSUserControls:Make">
+        <MSBuild Projects="package\UniSSUserControls.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="UniSSUserControls;UniSSUserControlsDemo"/>
+        <CallTarget Targets="UniSSUserControlsDemo;UniSSUserControls"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="UniSSUserControls:Clean;UniSSUserControlsDemo:Clean"/>
+        <CallTarget Targets="UniSSUserControlsDemo:Clean;UniSSUserControls:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="UniSSUserControls:Make;UniSSUserControlsDemo:Make"/>
+        <CallTarget Targets="UniSSUserControlsDemo:Make;UniSSUserControls:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

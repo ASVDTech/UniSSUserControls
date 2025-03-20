@@ -1,9 +1,10 @@
 object MainForm: TMainForm
   Left = 0
   Top = 0
-  ClientHeight = 553
-  ClientWidth = 782
+  ClientHeight = 606
+  ClientWidth = 979
   Caption = 'MainForm'
+  OnShow = UniFormShow
   OldCreateOrder = False
   MonitoredKeys.Keys = <>
   ClientEvents.ExtEvents.Strings = (
@@ -18,19 +19,14 @@ object MainForm: TMainForm
   OnAjaxEvent = UniFormAjaxEvent
   OnCreate = UniFormCreate
   TextHeight = 15
-  object UniButton1: TUniButton
-    Left = 360
-    Top = 288
+  object btnDeslogar: TUniButton
+    Left = 584
+    Top = 56
     Width = 75
     Height = 25
     Hint = ''
-    Caption = 'UniButton1'
+    Caption = 'Deslogar'
     TabOrder = 0
-  end
-  object UniSSUserControls1: TUniSSUserControls
-    TipoControle = Memoria
-    TipoConector = FireDAC
-    Left = 272
-    Top = 184
+    OnClick = btnDeslogarClick
   end
 end

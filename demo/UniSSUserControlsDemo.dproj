@@ -92,6 +92,7 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
+        <SanitizedProjectName>UniSSUserControlsDemo</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <DCC_UsePackage>bindengine;IndyIPCommon;RESTDWUniDACDriver;dbxcds;dbexpress;inet;FireDACDBXDriver;CustomIPTransport;stone_deeplink;rtl;DBXSqliteDriver;FireDAC;RESTDWCore;xmlrtl;dsnap;bindcompfmx;DataSnapCommon;fmxase;DBXInterBaseDriver;DataSnapClient;emsclientfiredac;FireDACDSDriver;tethering;CloudService;PythonFmx;soapserver;FireDACIBDriver;fmx;DbxCommonDriver;emsclient;IndyProtocols;FmxTeeUI;FireDACSqliteDriver;DbxClientDriver;soapmidas;Python;IndySystem;FireDACCommon;bindcompdbx;DataSnapFireDAC;DataSnapNativeClient;RESTDWSocketIndy;FireDACCommonDriver;IndyIPClient;fmxFireDAC;dbrtl;bindcomp;IndyCore;RESTBackendComponents;RESTComponents;IndyIPServer;dsnapxml;DataSnapProviderClient;FMXTee;soaprtl;$(DCC_UsePackage)</DCC_UsePackage>

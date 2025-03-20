@@ -27,10 +27,29 @@ package UniSSUserControls;
 {$ENDIF IMPLICITBUILDING}
 {$IMPLICITBUILD ON}
 
+requires
+  rtl,
+  vcl,
+  dbrtl,
+  vclFireDAC,
+  FireDAC,
+  FireDACCommonDriver,
+  FireDACCommon,
+  uniGUI29Core,
+  uniTools29,
+  uIndy29,
+  soaprtl,
+  xmlrtl,
+  inet,
+  vclimg,
+  vcldb,
+  vclwinx,
+  bindengine;
+
 contains
-  UniSSUserControls.TUniSSUserControls in '..\src\UniSSUserControls.TUniSSUserControls.pas',
   UniSSUserControls.Utils.Geral in '..\src\Utils\UniSSUserControls.Utils.Geral.pas',
   UniSSUserControls.Entidade.SessaoUsuario in '..\src\Entidades\UniSSUserControls.Entidade.SessaoUsuario.pas',
-  UniSSUserControls.Conector.FireDAC in '..\src\Conectores\FireDAC\UniSSUserControls.Conector.FireDAC.pas';
+  UniSSUserControls.Conector.FireDAC in '..\src\Conectores\FireDAC\UniSSUserControls.Conector.FireDAC.pas',
+  UniSSUserControls.TUniSSUserControls in '..\src\UniSSUserControls.TUniSSUserControls.pas';
 
 end.

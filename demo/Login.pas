@@ -5,19 +5,24 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics,
   Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
-  uniGUIClasses, uniGUIRegClasses, uniGUIForm, uniGUIBaseClasses, uniButton;
+  uniGUIClasses, uniGUIRegClasses, uniGUIForm, uniGUIBaseClasses, uniButton, uniCheckBox, uniEdit, uniBitBtn, UniFSButton, uniMultiItem, uniComboBox,
+  UniFSCombobox, uniImage, uniPageControl, uniLabel, uniPanel;
 
 type
-  TUniLoginForm1 = class(TUniLoginForm)
-    UniButton1: TUniButton;
-    procedure UniButton1Click(Sender: TObject);
+  TLoginFr = class(TUniLoginForm)
+    pnlLogin: TUniPanel;
+    edtLogin: TUniEdit;
+    edtSenha: TUniEdit;
+    btnEntrar: TUniButton;
+    procedure btnEntrarClick(Sender: TObject);
+    procedure UniLoginFormScreenResize(Sender: TObject; AWidth, AHeight: Integer);
   private
     { Private declarations }
   public
     { Public declarations }
   end;
 
-function UniLoginForm1: TUniLoginForm1;
+function LoginFr: TLoginFr;
 
 implementation
 
@@ -26,17 +31,29 @@ implementation
 uses
   uniGUIVars, MainModule, uniGUIApplication;
 
-function UniLoginForm1: TUniLoginForm1;
+function LoginFr: TLoginFr;
 begin
-  Result := TUniLoginForm1(UniMainModule.GetFormInstance(TUniLoginForm1));
+  Result := TLoginFr(UniMainModule.GetFormInstance(TLoginFr));
 end;
 
-procedure TUniLoginForm1.UniButton1Click(Sender: TObject);
+procedure TLoginFr.btnEntrarClick(Sender: TObject);
 begin
-  ModalResult := mrOk;
+  if UniMainModule.Logar(edtLogin.Text, edtSenha.Text) then
+  begin
+    ModalResult := mrOk;
+  end else
+  begin
+    ShowMessage('Usuário ou senha errado!');
+  end;
+end;
+
+procedure TLoginFr.UniLoginFormScreenResize(Sender: TObject; AWidth, AHeight: Integer);
+begin
+  pnlLogin.Top := (AHeight div 2) - (pnlLogin.Height div 2);
+  pnlLogin.Left := (AWidth div 2) - (pnlLogin.Width div 2);
 end;
 
 initialization
-  RegisterAppFormClass(TUniLoginForm1);
+  RegisterAppFormClass(TLoginFr);
 
 end.

@@ -3,7 +3,7 @@ unit UniSSUserControls.Entidade.SessaoUsuario;
 interface
 
 uses
-  System.Generics.Collections;
+  Generics.Collections;
 
 type
   TSessaoUsuario = class

@@ -21,17 +21,24 @@ uses
   UniSSUserControls.TUniSSUserControls;
 
 type
+  TStatusSessao = (Inativo, Ativo);
+  TStatusSessaoHeler = record helper for TStatusSessao
+    function ToInteger: UInt8;
+  end;
   TMainForm = class(TUniForm)
-    UniSSUserControls1: TUniSSUserControls;
-    UniButton1: TUniButton;
+    btnDeslogar: TUniButton;
     procedure UniFormCreate(Sender: TObject);
     procedure UniFormAjaxEvent(Sender: TComponent; EventName: string; Params: TUniStrings);
+    procedure UniFormShow(Sender: TObject);
+    procedure btnDeslogarClick(Sender: TObject);
   private
     { Private declarations }
     procedure CarregarConfiguracoes;
-    procedure CarregarParametros;
+    procedure CarregarParametrosEntrada;
+    procedure CarregarParametrosSaida;
   public
     { Public declarations }
+    procedure FinalizarSessao;
   end;
 
 function MainForm: TMainForm;
@@ -50,34 +57,69 @@ begin
   Result := TMainForm(UniMainModule.GetFormInstance(TMainForm));
 end;
 
-procedure TMainForm.CarregarConfiguracoes;
+procedure TMainForm.btnDeslogarClick(Sender: TObject);
 begin
-  UniSSUserControls1.Connection := nil; // Coloque aqui o seu connection
-  UniSSUserControls1.SQLIniciarSessao.Add('insert into sua_tabela');
-  UniSSUserControls1.SQLFinalizarSessao.Add('update sua_tabela');
-  CarregarParametros;
+  FinalizarSessao;
+  UniApplication.Restart;
 end;
 
-procedure TMainForm.CarregarParametros;
+procedure TMainForm.CarregarConfiguracoes;
 begin
-  UniSSUserControls1.ParametrosSQLIniciar.Add('campo1');
-  UniSSUserControls1.ParametrosSQLIniciar.Add('campo2');
+  UniMainModule.UniSSUserControls1.Connection := UniMainModule.Connection; // Coloque aqui o seu connection
+  UniMainModule.UniSSUserControls1.SQLIniciarSessao.Text := 'INSERT INTO sessoes (id_usuario, sessionID, dataEntrada, status ) ' +
+    'VALUES ( :id_usuario, :sessionID, :dataEntrada, :status )';
+  UniMainModule.UniSSUserControls1.SQLFinalizarSessao.Text := 'update sessoes set dataSaida = :dataSaida, status = :status where id_usuario = :id_usuario';
+  CarregarParametrosEntrada;
+end;
 
-  UniSSUserControls1.ParametrosSQLFinalizar.Add('campo1');
-  UniSSUserControls1.ParametrosSQLFinalizar.Add('campo1');
+procedure TMainForm.CarregarParametrosEntrada;
+begin
+  UniMainModule.UniSSUserControls1.ParametrosSQLIniciar.Clear;
+  UniMainModule.UniSSUserControls1.ParametrosSQLIniciar.Add(UniMainModule.IDUsuario.ToString);
+  UniMainModule.UniSSUserControls1.ParametrosSQLIniciar.Add(UniSession.SessionId);
+  UniMainModule.UniSSUserControls1.ParametrosSQLIniciar.Add(FormatDateTime('dd/mm/yyyy hh:nn:ss', Now));
+  UniMainModule.UniSSUserControls1.ParametrosSQLIniciar.Add(TStatusSessao.Ativo.ToInteger.ToString);
+end;
+
+procedure TMainForm.CarregarParametrosSaida;
+begin
+  UniMainModule.UniSSUserControls1.ParametrosSQLFinalizar.Clear;
+  UniMainModule.UniSSUserControls1.ParametrosSQLFinalizar.Add(FormatDateTime('dd/mm/yyyy hh:nn:ss', Now));
+  UniMainModule.UniSSUserControls1.ParametrosSQLFinalizar.Add(TStatusSessao.Inativo.ToInteger.ToString);
+  UniMainModule.UniSSUserControls1.ParametrosSQLFinalizar.Add(UniMainModule.IDUsuario.ToString);
+end;
+
+procedure TMainForm.FinalizarSessao;
+begin
+  CarregarParametrosSaida;
+  UniMainModule.UniSSUserControls1.FinalizarSessao;
 end;
 
 procedure TMainForm.UniFormAjaxEvent(Sender: TComponent; EventName: string; Params: TUniStrings);
 begin
   if SameText(EventName, 'SessionClosed') then
   begin
-    UniSSUserControls1.FinalizarSessao;
+    FinalizarSessao;
+    UniSession.Terminate;
   end;
 end;
 
 procedure TMainForm.UniFormCreate(Sender: TObject);
 begin
-//  UniSSUserControls1.CarregarControleFimSessao(Self);
+  UniMainModule.UniSSUserControls1.CarregarControleFimSessao(UniSession);
+  CarregarConfiguracoes;
+end;
+
+procedure TMainForm.UniFormShow(Sender: TObject);
+begin
+  UniMainModule.UniSSUserControls1.IniciarSessao;
+end;
+
+{ TStatusSessaoHeler }
+
+function TStatusSessaoHeler.ToInteger: UInt8;
+begin
+  Result := UInt8(Self);
 end;
 
 initialization

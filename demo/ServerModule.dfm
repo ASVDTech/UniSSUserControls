@@ -16,4 +16,8 @@ object UniServerModule: TUniServerModule
   Height = 750
   Width = 1000
   PixelsPerInch = 120
+  object SQLiteDriver: TFDPhysSQLiteDriverLink
+    Left = 104
+    Top = 72
+  end
 end

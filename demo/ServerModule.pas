@@ -4,10 +4,11 @@ interface
 
 uses
   Classes, SysUtils, uniGUIServer, uniGUIMainModule, uniGUIApplication, uIdCustomHTTPServer,
-  uniGUITypes;
+  uniGUITypes, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.Phys.SQLiteDef, FireDAC.Stan.Intf, FireDAC.Phys, FireDAC.Phys.SQLite;
 
 type
   TUniServerModule = class(TUniGUIServerModule)
+    SQLiteDriver: TFDPhysSQLiteDriverLink;
   private
     { Private declarations }
   protected
