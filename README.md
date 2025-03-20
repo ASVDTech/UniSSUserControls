@@ -60,7 +60,7 @@ Cada contribuição ajuda a manter este projeto ativo e melhorando constantement
 
 ## 📧 Suporte e Contato
 
-Se precisar de suporte ou quiser contribuir com melhorias, entre em contato via **[GitHub Issues]** ou pelo e-mail `suporte@steinsoft.com`.
+Se precisar de suporte ou quiser contribuir com melhorias, entre em contato via **[GitHub Issues]** ou pelo e-mail `arthur@asvdtechnology.com.br`.
 
 ---
 
